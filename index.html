@@ -1,53 +1,309 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <title>rilinium.com</title>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rilinium.com</title>
     <style>
-        * {
-            color: white;
+        /* Catppuccin Frappe */
+        :root {
+            --base:     #303446;
+            --mantle:   #292c3c;
+            --crust:    #232634;
+            --surface0: #414559;
+            --surface1: #51576d;
+            --surface2: #626880;
+            --overlay0: #737994;
+            --overlay1: #838ba7;
+            --text:     #c6d0f5;
+            --subtext1: #b5bfe2;
+            --subtext0: #a5adce;
+            --mauve:    #ca9ee6;
+            --blue:     #8caaee;
+            --sapphire: #85c1dc;
+            --sky:      #99d1db;
+            --teal:     #81c8be;
+            --green:    #a6d189;
+            --yellow:   #e5c890;
+            --peach:    #ef9f76;
+            --red:      #e78284;
+            --flamingo: #eebebe;
+            --pink:     #f4b8e4;
+            --lavender: #babbf1;
+            --rosewater:#f2d5cf;
         }
 
-        .box {
-            margin: auto;
-            width: 40%;
-            border: 3px solid #ffc6cc;
-            padding: 10px;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--base);
+            color: var(--text);
+            font-family: 'Courier New', Courier, monospace;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ── Header ── */
+        header {
+            width: 100%;
+            background-color: var(--mantle);
+            border-bottom: 2px solid var(--surface0);
+            padding: 24px 0 16px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            color: var(--mauve);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        header h1 img {
+            border-radius: 50%;
+            border: 2px solid var(--mauve);
+        }
+
+        /* ── Marquee ── */
+        .marquee-bar {
+            width: 100%;
+            background-color: var(--crust);
+            border-bottom: 1px solid var(--surface0);
+            padding: 6px 0;
+            font-size: 0.85rem;
+            color: var(--subtext0);
+            overflow: hidden;
+        }
+
+        .marquee-bar marquee {
+            color: var(--subtext0);
+        }
+
+        /* ── Nav ── */
+        nav {
+            display: flex;
+            gap: 8px;
+            padding: 16px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav a {
+            color: var(--blue);
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 6px 14px;
+            border: 1px solid var(--surface1);
+            border-radius: 4px;
+            background: var(--mantle);
+            transition: background 0.15s, border-color 0.15s, color 0.15s;
+        }
+
+        nav a:hover {
+            background: var(--surface0);
+            border-color: var(--blue);
+            color: var(--text);
+        }
+
+        /* ── Main content ── */
+        main {
+            width: min(680px, 92vw);
+            flex: 1;
+            padding: 32px 0 48px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        /* ── Section heading ── */
+        .section-heading {
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--overlay1);
+            margin-bottom: 14px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--surface0);
+        }
+
+        /* ── Project cards ── */
+        .projects-grid {
+            display: grid;
+            gap: 14px;
+        }
+
+        .card {
+            background: var(--mantle);
+            border: 1px solid var(--surface0);
+            border-radius: 6px;
+            padding: 18px 20px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            transition: border-color 0.15s, background 0.15s;
+        }
+
+        .card:hover {
+            border-color: var(--mauve);
+            background: var(--surface0);
+        }
+
+        .card-icon {
+            font-size: 1.6rem;
+            line-height: 1;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            color: var(--mauve);
+            font-weight: bold;
+        }
+
+        .card-desc {
+            font-size: 0.85rem;
+            color: var(--subtext1);
+            line-height: 1.5;
+        }
+
+        .card-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 999px;
+            background: var(--surface0);
+            color: var(--overlay1);
+            margin-top: 4px;
+            border: 1px solid var(--surface1);
+        }
+
+        /* ── Socials ── */
+        .socials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 10px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 14px;
+            background: var(--mantle);
+            border: 1px solid var(--surface0);
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--subtext1);
+            font-size: 0.9rem;
+            transition: border-color 0.15s, background 0.15s, color 0.15s;
+        }
+
+        .social-link:hover {
+            background: var(--surface0);
+            color: var(--text);
+        }
+
+        .social-link:nth-child(1):hover { border-color: var(--blue); }
+        .social-link:nth-child(2):hover { border-color: var(--sky); }
+
+        .social-icon {
+            font-size: 1.1rem;
+        }
+
+        /* ── Footer ── */
+        footer {
+            width: 100%;
+            background: var(--mantle);
+            border-top: 1px solid var(--surface0);
+            text-align: center;
+            padding: 14px;
+            font-size: 0.75rem;
+            color: var(--overlay0);
+        }
+
+        footer a {
+            color: var(--lavender);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 
 <body>
 
-    <body style="background-color:#383737;">
-
-        <h1 align="center">
-            <font size="36">
-                <img src="https://pfp.qfoxb.dev/rilinium.com.png" width="32" height="32">
-                rilinium's box
-            </font>
+    <header>
+        <h1>
+            <img src="https://avatars.githubusercontent.com/u/93229552?v=4" width="36" height="36" alt="rilinium avatar">
+            rilinium's box
         </h1>
-        <marquee style="font-size:15pt;"><tt>welcome to the box · more stuff coming NEVER · thanks for stopping by</tt></marquee>
-        <div style="text-align: center;">
-            <a href="index.html" style="font-family: monospace; margin-right: 10px; font-size: 24px;">Home</a>
-            <a href="https://github.com/rilinium"
-                style="font-family: monospace; margin-right: 10px; font-size: 24px;">GitHub</a>
-            <a href="https://bsky.app/profile/rilinium.com"
-                style="font-family: monospace; margin-right: 10px; font-size: 24px;">Bluesky</a>
-            <a href="https://splashdex.rilinium.com/"
-                style="font-family: monospace; margin-right: 10px; font-size: 24px;">Splashdex</a>
-        </div>
-        <div class="box">
-            <h1>my digital footprint looks like this 🐾</h1>
-        </div>
-        <div style="text-align: center;">
-            <div style="display: inline-block; white-space: nowrap; padding-top: 16px;"></div>
-            <!--                        <img src="img/88x31/winmedia.gif"> -->
-            <p>site copied from <a href="https://qfoxb.dev">qfoxb</a> used with permission</p>
-        </div>
+        <nav>
+            <a href="index.html">home</a>
+            <a href="https://github.com/rilinium">github</a>
+            <a href="https://bsky.app/profile/rilinium.com">bluesky</a>
+            <a href="https://splashdex.rilinium.com/">splashdex</a>
+        </nav>
+    </header>
 
-        </div>
-    </body>
+    <div class="marquee-bar">
+        <marquee>welcome to the box &nbsp;·&nbsp; more stuff coming NEVER &nbsp;·&nbsp; thanks for stopping by &nbsp;·&nbsp; welcome to the box &nbsp;·&nbsp; more stuff coming NEVER &nbsp;·&nbsp; thanks for stopping by</marquee>
+    </div>
+
+    <main>
+
+        <section>
+            <p class="section-heading">projects</p>
+            <div class="projects-grid">
+                <a class="card" href="https://splashdex.rilinium.com/" target="_blank" rel="noopener">
+                    <div class="card-icon">🌊</div>
+                    <div class="card-body">
+                        <span class="card-title">splashdex</span>
+                        <span class="card-desc">Pocket Frogs breed reference — 44,160 combinations, weekly sets, and frog builder.</span>
+                        <span class="card-tag">splashdex.rilinium.com</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section>
+            <p class="section-heading">socials</p>
+            <div class="socials-grid">
+                <a class="social-link" href="https://github.com/rilinium" target="_blank" rel="noopener">
+                    <span class="social-icon">⌨</span>
+                    <span>github</span>
+                </a>
+                <a class="social-link" href="https://bsky.app/profile/rilinium.com" target="_blank" rel="noopener">
+                    <span class="social-icon">☁</span>
+                    <span>bluesky</span>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        rilinium.com
+    </footer>
+
 </body>
-
 </html>
