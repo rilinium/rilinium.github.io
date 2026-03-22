@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,37 +9,33 @@
     <title>rilinium.com</title>
     <style>
         :root {
-            --base:     #1e1e2e;
-            --mantle:   #181825;
-            --crust:    #11111b;
-            --surface0: #313244;
-            --surface1: #45475a;
-            --surface2: #585b70;
-            --overlay0: #6c7086;
-            --overlay1: #7f849c;
-            --text:     #cdd6f4;
-            --subtext1: #bac2de;
-            --subtext0: #a6adc8;
-            --mauve:    #cba6f7;
-            --blue:     #89b4fa;
-            --sapphire: #74c7ec;
-            --sky:      #89dceb;
-            --teal:     #94e2d5;
-            --green:    #a6e3a1;
-            --yellow:   #f9e2af;
-            --peach:    #fab387;
-            --red:      #f38ba8;
-            --flamingo: #f2cdcd;
-            --pink:     #f5c2e7;
-            --lavender: #b4befe;
-            --rosewater:#f5e0dc;
+            --base:      #1e1e2e;
+            --mantle:    #181825;
+            --crust:     #11111b;
+            --surface0:  #313244;
+            --surface1:  #45475a;
+            --surface2:  #585b70;
+            --overlay0:  #6c7086;
+            --overlay1:  #7f849c;
+            --text:      #cdd6f4;
+            --subtext1:  #bac2de;
+            --subtext0:  #a6adc8;
+            --rosewater: #f5e0dc;
+            --flamingo:  #f2cdcd;
+            --pink:      #f5c2e7;
+            --mauve:     #cba6f7;
+            --red:       #f38ba8;
+            --peach:     #fab387;
+            --yellow:    #f9e2af;
+            --green:     #a6e3a1;
+            --teal:      #94e2d5;
+            --sky:       #89dceb;
+            --sapphire:  #74c7ec;
+            --blue:      #89b4fa;
+            --lavender:  #b4befe;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             background-color: var(--base);
@@ -52,30 +47,18 @@
             align-items: center;
         }
 
-        @keyframes marquee-surge {
-            0%   { opacity: 0; }
-            20%  { opacity: 1; }
-            100% { opacity: 0; }
-        }
-
-        .marquee-bar::after {
-            content: '';
-            position: absolute;
+        #bg-canvas {
+            position: fixed;
             inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
             pointer-events: none;
-            box-shadow: 0 6px 40px 8px color-mix(in srgb, var(--blue) 70%, transparent),
-                        0 4px 24px 4px color-mix(in srgb, var(--mauve) 55%, transparent);
-            opacity: 0;
         }
 
-        .marquee-bar.glow-surge::after {
-            animation: marquee-surge 2.5s ease-out forwards;
-        }
-
-        @keyframes header-ring {
-            0%   { transform: translate(-50%, -50%) scale(0); opacity: 1; }
-            60%  { opacity: 0.7; }
-            100% { transform: translate(-50%, -50%) scale(40); opacity: 0; }
+        header, .marquee-bar, main, footer, .paws-badge {
+            position: relative;
+            z-index: 1;
         }
 
         header {
@@ -85,6 +68,33 @@
             padding: 12px 32px;
             position: relative;
             overflow: hidden;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        .header-logo {
+            height: 64px;
+            width: auto;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            will-change: transform, filter;
+        }
+
+        .header-logo:hover {
+            transform: scale(1.06);
+            filter: drop-shadow(0 0 8px var(--mauve)) drop-shadow(0 0 20px var(--blue));
+        }
+
+        @keyframes header-ring {
+            0%   { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+            60%  { opacity: 0.7; }
+            100% { transform: translate(-50%, -50%) scale(40); opacity: 0; }
         }
 
         .header-ring {
@@ -99,43 +109,6 @@
             pointer-events: none;
             will-change: transform, opacity;
             animation: header-ring 2.5s ease-out forwards;
-        }
-
-        .header-inner {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 24px;
-        }
-
-        .header-logo {
-            height: 64px;
-            width: auto;
-            flex-shrink: 0;
-            transition: transform 0.3s ease, filter 0.3s ease;
-            cursor: pointer;
-        }
-
-        .header-logo:hover {
-            transform: scale(1.06);
-            filter: drop-shadow(0 0 8px var(--mauve)) drop-shadow(0 0 20px var(--blue));
-        }
-
-        .marquee-bar {
-            width: 100%;
-            background-color: var(--crust);
-            border-bottom: 1px solid var(--surface0);
-            padding: 6px 0;
-            font-size: 0.85rem;
-            color: var(--subtext0);
-            position: relative;
-            box-shadow: 0 4px 18px 2px color-mix(in srgb, var(--blue) 30%, transparent),
-                        0 2px 8px 0px color-mix(in srgb, var(--mauve) 20%, transparent);
-        }
-
-        .marquee-bar marquee {
-            color: var(--subtext0);
-            overflow: hidden;
         }
 
         nav {
@@ -161,6 +134,40 @@
             color: var(--text);
         }
 
+        @keyframes marquee-surge {
+            0%   { opacity: 0; }
+            20%  { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        .marquee-bar {
+            width: 100%;
+            background-color: var(--crust);
+            border-bottom: 1px solid var(--surface0);
+            padding: 6px 0;
+            font-size: 0.85rem;
+            color: var(--subtext0);
+            position: relative;
+            box-shadow: 0 4px 18px 2px color-mix(in srgb, var(--blue) 30%, transparent),
+                        0 2px 8px 0px color-mix(in srgb, var(--mauve) 20%, transparent);
+        }
+
+        .marquee-bar marquee { overflow: hidden; }
+
+        .marquee-bar::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            box-shadow: 0 6px 40px 8px color-mix(in srgb, var(--blue) 70%, transparent),
+                        0 4px 24px 4px color-mix(in srgb, var(--mauve) 55%, transparent);
+            opacity: 0;
+        }
+
+        .marquee-bar.glow-surge::after {
+            animation: marquee-surge 2.5s ease-out forwards;
+        }
+
         main {
             width: min(680px, 92vw);
             flex: 1;
@@ -168,6 +175,16 @@
             display: flex;
             flex-direction: column;
             gap: 40px;
+        }
+
+        .section-heading {
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--overlay1);
+            margin-bottom: 14px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--surface0);
         }
 
         .about-card {
@@ -184,9 +201,7 @@
             margin-bottom: 10px;
         }
 
-        .about-text:last-child {
-            margin-bottom: 0;
-        }
+        .about-text:last-child { margin-bottom: 0; }
 
         .about-text a {
             color: var(--mauve);
@@ -200,20 +215,7 @@
             border-color: var(--lavender);
         }
 
-        .section-heading {
-            font-size: 0.75rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--overlay1);
-            margin-bottom: 14px;
-            padding-bottom: 6px;
-            border-bottom: 1px solid var(--surface0);
-        }
-
-        .projects-grid {
-            display: grid;
-            gap: 14px;
-        }
+        .projects-grid { display: grid; gap: 14px; }
 
         .card {
             background: var(--mantle);
@@ -228,35 +230,15 @@
             transition: border-color 0.15s, background 0.15s;
         }
 
-        .card:hover {
-            border-color: var(--mauve);
-            background: var(--surface0);
-        }
+        .card:hover { border-color: var(--mauve); background: var(--surface0); }
 
-        .card-icon {
-            font-size: 1.6rem;
-            line-height: 1;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
+        .card-icon { font-size: 1.6rem; line-height: 1; flex-shrink: 0; margin-top: 2px; }
 
-        .card-body {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
+        .card-body { display: flex; flex-direction: column; gap: 4px; }
 
-        .card-title {
-            font-size: 1rem;
-            color: var(--mauve);
-            font-weight: bold;
-        }
+        .card-title { font-size: 1rem; color: var(--mauve); font-weight: bold; }
 
-        .card-desc {
-            font-size: 0.85rem;
-            color: var(--subtext1);
-            line-height: 1.5;
-        }
+        .card-desc { font-size: 0.85rem; color: var(--subtext1); line-height: 1.5; }
 
         .card-tag {
             display: inline-block;
@@ -289,17 +271,11 @@
             transition: border-color 0.15s, background 0.15s, color 0.15s;
         }
 
-        .social-link:hover {
-            background: var(--surface0);
-            color: var(--text);
-        }
-
+        .social-link:hover { background: var(--surface0); color: var(--text); }
         .social-link:nth-child(1):hover { border-color: var(--blue); }
         .social-link:nth-child(2):hover { border-color: var(--sky); }
 
-        .social-icon {
-            font-size: 1.1rem;
-        }
+        .social-icon { font-size: 1.1rem; }
 
         footer {
             width: 100%;
@@ -311,14 +287,8 @@
             color: var(--overlay0);
         }
 
-        footer a {
-            color: var(--lavender);
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
+        footer a { color: var(--lavender); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
 
         .paws-badge {
             position: fixed;
@@ -327,200 +297,164 @@
             z-index: 999;
             image-rendering: pixelated;
         }
-
-        #bg-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        header, .marquee-bar, main, footer, .paws-badge {
-            position: relative;
-            z-index: 1;
-        }
     </style>
 </head>
-
 <body>
 
-    <canvas id="bg-canvas"></canvas>
+<canvas id="bg-canvas"></canvas>
 
-    <header>
-        <div class="header-inner">
-            <nav>
-                <a href="index.html">home</a>
-                <a href="https://github.com/rilinium">github</a>
-            </nav>
-            <img src="Rilinium.svg" class="header-logo" alt="rilinium">
-            <nav>
-                <a href="https://bsky.app/profile/rilinium.com">bluesky</a>
-                <a href="https://splashdex.rilinium.com/">splashdex</a>
-            </nav>
-        </div>
-    </header>
-
-    <div class="marquee-bar">
-       <marquee>welcome to the box &nbsp;·&nbsp; more stuff coming NEVER &nbsp;·&nbsp; hover over the logo for funny effect &nbsp;·&nbsp; welcome to the box &nbsp;·&nbsp; check out splashdex &nbsp;·&nbsp; thanks for stopping by</marquee>
+<header>
+    <div class="header-inner">
+        <nav>
+            <a href="index.html">home</a>
+            <a href="https://github.com/rilinium">github</a>
+        </nav>
+        <img src="Rilinium.svg" class="header-logo" alt="rilinium">
+        <nav>
+            <a href="https://bsky.app/profile/rilinium.com">bluesky</a>
+            <a href="https://splashdex.rilinium.com/">splashdex</a>
+        </nav>
     </div>
+</header>
 
-    <main>
+<div class="marquee-bar">
+    <marquee>welcome to the box &nbsp;·&nbsp; the most website ever &nbsp;·&nbsp; thanks for stopping by &nbsp;·&nbsp; welcome to the box &nbsp;·&nbsp; hover over the logo for funny effect &nbsp;·&nbsp; thanks for stopping by</marquee>
+</div>
 
-        <section>
-            <p class="section-heading">about</p>
-            <div class="about-card">
-                <p class="about-text">hi, I'm Riley, known online as Rilinium. I'm a graphic designer, video editor, and videographer.</p>
-                <p class="about-text">my editor of choice is <a href="https://www.blackmagicdesign.com/products/davinciresolve" target="_blank" rel="noopener">davinci resolve</a>, and my design suite is <a href="https://www.affinity.studio/" target="_blank" rel="noopener">affinity</a>, because fuck adobe.</p>
-            </div>
-        </section>
+<main>
 
-        <section>
-            <p class="section-heading">projects</p>
-            <div class="projects-grid">
-                <a class="card" href="https://splashdex.rilinium.com/" target="_blank" rel="noopener">
-                    <div class="card-icon">🌊</div>
-                    <div class="card-body">
-                        <span class="card-title">splashdex</span>
-                        <span class="card-desc">The ultimate unofficial resource for the Pocket Frogs game.</span>
-                        <span class="card-tag">splashdex.rilinium.com</span>
-                    </div>
-                </a>
-            </div>
-        </section>
+    <section>
+        <p class="section-heading">about</p>
+        <div class="about-card">
+            <p class="about-text">hi, I'm Riley, known online as Rilinium. I'm a graphic designer, video editor, and videographer.</p>
+            <p class="about-text">my editor of choice is <a href="https://www.blackmagicdesign.com/products/davinciresolve" target="_blank" rel="noopener">davinci resolve</a>, and my design suite is <a href="https://www.affinity.studio/" target="_blank" rel="noopener">affinity</a>, because fuck adobe.</p>
+        </div>
+    </section>
 
-        <section>
-            <p class="section-heading">socials</p>
-            <div class="socials-grid">
-                <a class="social-link" href="https://github.com/rilinium" target="_blank" rel="noopener">
-                    <span class="social-icon">⌨</span>
-                    <span>github</span>
-                </a>
-                <a class="social-link" href="https://bsky.app/profile/rilinium.com" target="_blank" rel="noopener">
-                    <span class="social-icon">☁</span>
-                    <span>bluesky</span>
-                </a>
-            </div>
-        </section>
+    <section>
+        <p class="section-heading">projects</p>
+        <div class="projects-grid">
+            <a class="card" href="https://splashdex.rilinium.com/" target="_blank" rel="noopener">
+                <div class="card-icon">🌊</div>
+                <div class="card-body">
+                    <span class="card-title">splashdex</span>
+                    <span class="card-desc">The ultimate unofficial resource for the Pocket Frogs game.</span>
+                    <span class="card-tag">splashdex.rilinium.com</span>
+                </div>
+            </a>
+        </div>
+    </section>
 
-    </main>
+    <section>
+        <p class="section-heading">socials</p>
+        <div class="socials-grid">
+            <a class="social-link" href="https://github.com/rilinium" target="_blank" rel="noopener">
+                <span class="social-icon">⌨</span>
+                <span>github</span>
+            </a>
+            <a class="social-link" href="https://bsky.app/profile/rilinium.com" target="_blank" rel="noopener">
+                <span class="social-icon">☁</span>
+                <span>bluesky</span>
+            </a>
+        </div>
+    </section>
 
-    <footer>
-        rilinium.com
-    </footer>
+</main>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script>
-        (function () {
-            const canvas = document.getElementById('bg-canvas');
-            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            renderer.setSize(window.innerWidth, window.innerHeight);
+<footer>rilinium.com</footer>
 
-            const scene = new THREE.Scene();
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function () {
+    const canvas = document.getElementById('bg-canvas');
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-            let W = window.innerWidth, H = window.innerHeight;
-            const camera = new THREE.OrthographicCamera(-W/2, W/2, H/2, -H/2, 0.1, 100);
-            camera.position.z = 10;
+    const scene = new THREE.Scene();
+    let W = window.innerWidth, H = window.innerHeight;
 
-            const PALETTE = [0xcba6f7, 0x89b4fa, 0xb4befe, 0x74c7ec, 0x89dceb, 0x94e2d5];
-            const COUNT = 300;
-            const SLANT = 0.12;
+    renderer.setSize(W, H);
 
-            const drops = Array.from({ length: COUNT }, () => ({
-                x: (Math.random() - 0.5) * W,
-                y: (Math.random() - 0.5) * H,
-                len: Math.random() * 18 + 8,
-                speed: Math.random() * 4 + 3,
-                color: new THREE.Color(PALETTE[Math.floor(Math.random() * PALETTE.length)]),
-                opacity: Math.random() * 0.4 + 0.15,
-            }));
+    const camera = new THREE.OrthographicCamera(-W/2, W/2, H/2, -H/2, 0.1, 100);
+    camera.position.z = 10;
 
-            const positions = new Float32Array(COUNT * 6);
-            const colorsArr = new Float32Array(COUNT * 6);
+    const PALETTE = [0xcba6f7, 0x89b4fa, 0xb4befe, 0x74c7ec, 0x89dceb, 0x94e2d5];
+    const COUNT   = 300;
+    const SLANT   = 0.12;
 
-            drops.forEach((d, i) => {
-                colorsArr[i*6]   = d.color.r * d.opacity; colorsArr[i*6+1] = d.color.g * d.opacity; colorsArr[i*6+2] = d.color.b * d.opacity;
-                colorsArr[i*6+3] = d.color.r * d.opacity; colorsArr[i*6+4] = d.color.g * d.opacity; colorsArr[i*6+5] = d.color.b * d.opacity;
-            });
+    const drops = Array.from({ length: COUNT }, () => ({
+        x:       (Math.random() - 0.5) * W,
+        y:       (Math.random() - 0.5) * H,
+        len:     Math.random() * 18 + 8,
+        speed:   Math.random() * 4 + 3,
+        color:   new THREE.Color(PALETTE[Math.floor(Math.random() * PALETTE.length)]),
+        opacity: Math.random() * 0.4 + 0.15,
+    }));
 
-            const geometry = new THREE.BufferGeometry();
-            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-            geometry.setAttribute('color',    new THREE.BufferAttribute(colorsArr, 3));
+    const positions = new Float32Array(COUNT * 6);
+    const colors    = new Float32Array(COUNT * 6);
 
-            const material = new THREE.LineBasicMaterial({ vertexColors: true });
-            const lines = new THREE.LineSegments(geometry, material);
-            scene.add(lines);
+    drops.forEach((d, i) => {
+        const r = d.color.r * d.opacity, g = d.color.g * d.opacity, b = d.color.b * d.opacity;
+        colors.set([r, g, b, r, g, b], i * 6);
+    });
 
-            function updatePositions() {
-                drops.forEach((d, i) => {
-                    positions[i*6]   = d.x;
-                    positions[i*6+1] = d.y;
-                    positions[i*6+2] = 0;
-                    positions[i*6+3] = d.x + d.len * SLANT;
-                    positions[i*6+4] = d.y - d.len;
-                    positions[i*6+5] = 0;
-                });
-                geometry.attributes.position.needsUpdate = true;
-            }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geo.setAttribute('color',    new THREE.BufferAttribute(colors, 3));
 
-            function animate() {
-                requestAnimationFrame(animate);
-                drops.forEach(d => {
-                    d.y -= d.speed;
-                    d.x += d.speed * SLANT;
-                    if (d.y < -H/2 - d.len) {
-                        d.y = H/2 + d.len;
-                        d.x = (Math.random() - 0.5) * W;
-                    }
-                });
-                updatePositions();
-                renderer.render(scene, camera);
-            }
-            animate();
+    scene.add(new THREE.LineSegments(geo, new THREE.LineBasicMaterial({ vertexColors: true })));
 
-            window.addEventListener('resize', () => {
-                W = window.innerWidth; H = window.innerHeight;
-                renderer.setSize(W, H);
-                camera.left = -W/2; camera.right = W/2;
-                camera.top  =  H/2; camera.bottom = -H/2;
-                camera.updateProjectionMatrix();
-            });
-        })();
-    </script>
+    function tick() {
+        requestAnimationFrame(tick);
+        drops.forEach((d, i) => {
+            d.y -= d.speed;
+            d.x += d.speed * SLANT;
+            if (d.y < -H/2 - d.len) { d.y = H/2 + d.len; d.x = (Math.random() - 0.5) * W; }
+            positions.set([d.x, d.y, 0, d.x + d.len * SLANT, d.y - d.len, 0], i * 6);
+        });
+        geo.attributes.position.needsUpdate = true;
+        renderer.render(scene, camera);
+    }
+    tick();
 
-    <script>
-        (function () {
-            const MAX_RINGS = 3;
-            const COOLDOWN  = 800;
-            let lastFired   = 0;
-            let activeRings = 0;
+    window.addEventListener('resize', () => {
+        W = window.innerWidth; H = window.innerHeight;
+        renderer.setSize(W, H);
+        Object.assign(camera, { left: -W/2, right: W/2, top: H/2, bottom: -H/2 });
+        camera.updateProjectionMatrix();
+    });
+})();
+</script>
 
-            document.querySelector('.header-logo').addEventListener('mouseenter', () => {
-                const now = performance.now();
-                if (now - lastFired < COOLDOWN || activeRings >= MAX_RINGS) return;
-                lastFired = now;
+<script>
+(function () {
+    const MAX_RINGS = 3;
+    const COOLDOWN  = 800;
+    let lastFired   = 0;
+    let activeRings = 0;
 
-                const header  = document.querySelector('header');
-                const marquee = document.querySelector('.marquee-bar');
+    const logo    = document.querySelector('.header-logo');
+    const header  = document.querySelector('header');
+    const marquee = document.querySelector('.marquee-bar');
 
-                const ring = document.createElement('div');
-                ring.classList.add('header-ring');
-                header.appendChild(ring);
-                activeRings++;
-                ring.addEventListener('animationend', () => {
-                    ring.remove();
-                    activeRings--;
-                });
+    logo.addEventListener('mouseenter', () => {
+        const now = performance.now();
+        if (now - lastFired < COOLDOWN || activeRings >= MAX_RINGS) return;
+        lastFired = now;
 
-                marquee.classList.remove('glow-surge');
-                void marquee.offsetWidth;
-                marquee.classList.add('glow-surge');
-            });
-        })();
-    </script>
+        const ring = document.createElement('div');
+        ring.className = 'header-ring';
+        header.appendChild(ring);
+        activeRings++;
+        ring.addEventListener('animationend', () => { ring.remove(); activeRings--; }, { once: true });
+
+        marquee.classList.remove('glow-surge');
+        void marquee.offsetWidth;
+        marquee.classList.add('glow-surge');
+    });
+})();
+</script>
 
 </body>
 </html>
