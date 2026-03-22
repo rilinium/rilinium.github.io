@@ -6,32 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>rilinium.com</title>
     <style>
-        /* Catppuccin Frappe */
         :root {
-            --base:     #303446;
-            --mantle:   #292c3c;
-            --crust:    #232634;
-            --surface0: #414559;
-            --surface1: #51576d;
-            --surface2: #626880;
-            --overlay0: #737994;
-            --overlay1: #838ba7;
-            --text:     #c6d0f5;
-            --subtext1: #b5bfe2;
-            --subtext0: #a5adce;
-            --mauve:    #ca9ee6;
-            --blue:     #8caaee;
-            --sapphire: #85c1dc;
-            --sky:      #99d1db;
-            --teal:     #81c8be;
-            --green:    #a6d189;
-            --yellow:   #e5c890;
-            --peach:    #ef9f76;
-            --red:      #e78284;
-            --flamingo: #eebebe;
-            --pink:     #f4b8e4;
-            --lavender: #babbf1;
-            --rosewater:#f2d5cf;
+            --base:     #1e1e2e;
+            --mantle:   #181825;
+            --crust:    #11111b;
+            --surface0: #313244;
+            --surface1: #45475a;
+            --surface2: #585b70;
+            --overlay0: #6c7086;
+            --overlay1: #7f849c;
+            --text:     #cdd6f4;
+            --subtext1: #bac2de;
+            --subtext0: #a6adc8;
+            --mauve:    #cba6f7;
+            --blue:     #89b4fa;
+            --sapphire: #74c7ec;
+            --sky:      #89dceb;
+            --teal:     #94e2d5;
+            --green:    #a6e3a1;
+            --yellow:   #f9e2af;
+            --peach:    #fab387;
+            --red:      #f38ba8;
+            --flamingo: #f2cdcd;
+            --pink:     #f5c2e7;
+            --lavender: #b4befe;
+            --rosewater:#f5e0dc;
         }
 
         * {
@@ -50,30 +49,75 @@
             align-items: center;
         }
 
-        /* ── Header ── */
+        @keyframes marquee-surge {
+            0%   { opacity: 0; }
+            20%  { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        .marquee-bar::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            box-shadow: 0 6px 40px 8px color-mix(in srgb, var(--blue) 70%, transparent),
+                        0 4px 24px 4px color-mix(in srgb, var(--mauve) 55%, transparent);
+            opacity: 0;
+        }
+
+        .marquee-bar.glow-surge::after {
+            animation: marquee-surge 2.5s ease-out forwards;
+        }
+
+        @keyframes header-ring {
+            0%   { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+            60%  { opacity: 0.7; }
+            100% { transform: translate(-50%, -50%) scale(40); opacity: 0; }
+        }
+
         header {
             width: 100%;
             background-color: var(--mantle);
             border-bottom: 2px solid var(--surface0);
-            padding: 24px 0 16px;
-            text-align: center;
+            padding: 12px 32px;
+            position: relative;
+            overflow: hidden;
         }
 
-        header h1 {
-            font-size: 2rem;
-            color: var(--mauve);
+        .header-ring {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 3px solid var(--mauve);
+            box-shadow: 0 0 6px 2px var(--mauve), 0 0 18px 4px var(--blue), inset 0 0 6px 1px var(--lavender);
+            pointer-events: none;
+            will-change: transform, opacity;
+            animation: header-ring 2.5s ease-out forwards;
+        }
+
+        .header-inner {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 24px;
         }
 
-        header h1 img {
-            border-radius: 50%;
-            border: 2px solid var(--mauve);
+        .header-logo {
+            height: 64px;
+            width: auto;
+            flex-shrink: 0;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            cursor: pointer;
         }
 
-        /* ── Marquee ── */
+        .header-logo:hover {
+            transform: scale(1.06);
+            filter: drop-shadow(0 0 8px var(--mauve)) drop-shadow(0 0 20px var(--blue));
+        }
+
         .marquee-bar {
             width: 100%;
             background-color: var(--crust);
@@ -81,27 +125,27 @@
             padding: 6px 0;
             font-size: 0.85rem;
             color: var(--subtext0);
-            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 18px 2px color-mix(in srgb, var(--blue) 30%, transparent),
+                        0 2px 8px 0px color-mix(in srgb, var(--mauve) 20%, transparent);
         }
 
         .marquee-bar marquee {
             color: var(--subtext0);
+            overflow: hidden;
         }
 
-        /* ── Nav ── */
         nav {
             display: flex;
-            gap: 8px;
-            padding: 16px 0;
-            flex-wrap: wrap;
-            justify-content: center;
+            flex-direction: column;
+            gap: 6px;
         }
 
         nav a {
             color: var(--blue);
             text-decoration: none;
-            font-size: 1rem;
-            padding: 6px 14px;
+            font-size: 0.85rem;
+            padding: 4px 12px;
             border: 1px solid var(--surface1);
             border-radius: 4px;
             background: var(--mantle);
@@ -114,7 +158,6 @@
             color: var(--text);
         }
 
-        /* ── Main content ── */
         main {
             width: min(680px, 92vw);
             flex: 1;
@@ -124,7 +167,36 @@
             gap: 40px;
         }
 
-        /* ── Section heading ── */
+        .about-card {
+            background: var(--mantle);
+            border: 1px solid var(--surface0);
+            border-radius: 6px;
+            padding: 18px 20px;
+        }
+
+        .about-text {
+            font-size: 0.95rem;
+            color: var(--subtext1);
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+
+        .about-text:last-child {
+            margin-bottom: 0;
+        }
+
+        .about-text a {
+            color: var(--mauve);
+            text-decoration: none;
+            border-bottom: 1px solid color-mix(in srgb, var(--mauve) 40%, transparent);
+            transition: color 0.15s, border-color 0.15s;
+        }
+
+        .about-text a:hover {
+            color: var(--lavender);
+            border-color: var(--lavender);
+        }
+
         .section-heading {
             font-size: 0.75rem;
             letter-spacing: 0.15em;
@@ -135,7 +207,6 @@
             border-bottom: 1px solid var(--surface0);
         }
 
-        /* ── Project cards ── */
         .projects-grid {
             display: grid;
             gap: 14px;
@@ -195,7 +266,6 @@
             border: 1px solid var(--surface1);
         }
 
-        /* ── Socials ── */
         .socials-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -228,7 +298,6 @@
             font-size: 1.1rem;
         }
 
-        /* ── Footer ── */
         footer {
             width: 100%;
             background: var(--mantle);
@@ -248,7 +317,6 @@
             text-decoration: underline;
         }
 
-        /* ── Paws badge ── */
         .paws-badge {
             position: fixed;
             bottom: 16px;
@@ -256,22 +324,40 @@
             z-index: 999;
             image-rendering: pixelated;
         }
+
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        header, .marquee-bar, main, footer, .paws-badge {
+            position: relative;
+            z-index: 1;
+        }
     </style>
 </head>
 
 <body>
 
+    <canvas id="bg-canvas"></canvas>
+
     <header>
-        <h1>
-            <img src="https://avatars.githubusercontent.com/u/93229552?v=4" width="36" height="36" alt="rilinium avatar">
-            rilinium's box
-        </h1>
-        <nav>
-            <a href="index.html">home</a>
-            <a href="https://github.com/rilinium">github</a>
-            <a href="https://bsky.app/profile/rilinium.com">bluesky</a>
-            <a href="https://splashdex.rilinium.com/">splashdex</a>
-        </nav>
+        <div class="header-inner">
+            <nav>
+                <a href="index.html">home</a>
+                <a href="https://github.com/rilinium">github</a>
+            </nav>
+            <img src="Rilinium.svg" class="header-logo" alt="rilinium">
+            <nav>
+                <a href="https://bsky.app/profile/rilinium.com">bluesky</a>
+                <a href="https://splashdex.rilinium.com/">splashdex</a>
+            </nav>
+        </div>
     </header>
 
     <div class="marquee-bar">
@@ -281,13 +367,21 @@
     <main>
 
         <section>
+            <p class="section-heading">about</p>
+            <div class="about-card">
+                <p class="about-text">hi, I'm Riley, known online as Rilinium. I'm a graphic designer, video editor, and videographer.</p>
+                <p class="about-text">my editor of choice is <a href="https://www.blackmagicdesign.com/products/davinciresolve" target="_blank" rel="noopener">davinci resolve</a>, and my design suite is <a href="https://www.affinity.studio/" target="_blank" rel="noopener">affinity</a>, because fuck adobe.</p>
+            </div>
+        </section>
+
+        <section>
             <p class="section-heading">projects</p>
             <div class="projects-grid">
                 <a class="card" href="https://splashdex.rilinium.com/" target="_blank" rel="noopener">
                     <div class="card-icon">🌊</div>
                     <div class="card-body">
                         <span class="card-title">splashdex</span>
-                        <span class="card-desc">Pocket Frogs breed reference — 44,160 combinations, weekly sets, and frog builder.</span>
+                        <span class="card-desc">The ultimate unofficial resource for the Pocket Frogs game.</span>
                         <span class="card-tag">splashdex.rilinium.com</span>
                     </div>
                 </a>
@@ -314,7 +408,116 @@
         rilinium.com
     </footer>
 
-    <img class="paws-badge" src="paws.gif" alt="paws">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        (function () {
+            const canvas = document.getElementById('bg-canvas');
+            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            const scene = new THREE.Scene();
+
+            let W = window.innerWidth, H = window.innerHeight;
+            const camera = new THREE.OrthographicCamera(-W/2, W/2, H/2, -H/2, 0.1, 100);
+            camera.position.z = 10;
+
+            const PALETTE = [0xcba6f7, 0x89b4fa, 0xb4befe, 0x74c7ec, 0x89dceb, 0x94e2d5];
+            const COUNT = 300;
+            const SLANT = 0.12;
+
+            const drops = Array.from({ length: COUNT }, () => ({
+                x: (Math.random() - 0.5) * W,
+                y: (Math.random() - 0.5) * H,
+                len: Math.random() * 18 + 8,
+                speed: Math.random() * 4 + 3,
+                color: new THREE.Color(PALETTE[Math.floor(Math.random() * PALETTE.length)]),
+                opacity: Math.random() * 0.4 + 0.15,
+            }));
+
+            const positions = new Float32Array(COUNT * 6);
+            const colorsArr = new Float32Array(COUNT * 6);
+
+            drops.forEach((d, i) => {
+                colorsArr[i*6]   = d.color.r * d.opacity; colorsArr[i*6+1] = d.color.g * d.opacity; colorsArr[i*6+2] = d.color.b * d.opacity;
+                colorsArr[i*6+3] = d.color.r * d.opacity; colorsArr[i*6+4] = d.color.g * d.opacity; colorsArr[i*6+5] = d.color.b * d.opacity;
+            });
+
+            const geometry = new THREE.BufferGeometry();
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('color',    new THREE.BufferAttribute(colorsArr, 3));
+
+            const material = new THREE.LineBasicMaterial({ vertexColors: true });
+            const lines = new THREE.LineSegments(geometry, material);
+            scene.add(lines);
+
+            function updatePositions() {
+                drops.forEach((d, i) => {
+                    positions[i*6]   = d.x;
+                    positions[i*6+1] = d.y;
+                    positions[i*6+2] = 0;
+                    positions[i*6+3] = d.x + d.len * SLANT;
+                    positions[i*6+4] = d.y - d.len;
+                    positions[i*6+5] = 0;
+                });
+                geometry.attributes.position.needsUpdate = true;
+            }
+
+            function animate() {
+                requestAnimationFrame(animate);
+                drops.forEach(d => {
+                    d.y -= d.speed;
+                    d.x += d.speed * SLANT;
+                    if (d.y < -H/2 - d.len) {
+                        d.y = H/2 + d.len;
+                        d.x = (Math.random() - 0.5) * W;
+                    }
+                });
+                updatePositions();
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            window.addEventListener('resize', () => {
+                W = window.innerWidth; H = window.innerHeight;
+                renderer.setSize(W, H);
+                camera.left = -W/2; camera.right = W/2;
+                camera.top  =  H/2; camera.bottom = -H/2;
+                camera.updateProjectionMatrix();
+            });
+        })();
+    </script>
+
+    <script>
+        (function () {
+            const MAX_RINGS = 3;
+            const COOLDOWN  = 800;
+            let lastFired   = 0;
+            let activeRings = 0;
+
+            document.querySelector('.header-logo').addEventListener('mouseenter', () => {
+                const now = performance.now();
+                if (now - lastFired < COOLDOWN || activeRings >= MAX_RINGS) return;
+                lastFired = now;
+
+                const header  = document.querySelector('header');
+                const marquee = document.querySelector('.marquee-bar');
+
+                const ring = document.createElement('div');
+                ring.classList.add('header-ring');
+                header.appendChild(ring);
+                activeRings++;
+                ring.addEventListener('animationend', () => {
+                    ring.remove();
+                    activeRings--;
+                });
+
+                marquee.classList.remove('glow-surge');
+                void marquee.offsetWidth;
+                marquee.classList.add('glow-surge');
+            });
+        })();
+    </script>
 
 </body>
 </html>
