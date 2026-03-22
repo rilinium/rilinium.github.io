@@ -277,6 +277,45 @@
 
         .social-icon { font-size: 1.1rem; }
 
+        @media (max-width: 640px) {
+            header { padding: 10px 16px; }
+
+            .header-inner {
+                flex-wrap: wrap;
+                justify-content: center;
+                row-gap: 10px;
+            }
+
+            .header-logo {
+                order: -1;
+                flex: 0 0 100%;
+                height: 52px;
+                display: block;
+                margin: 0 auto;
+            }
+
+            nav {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 6px;
+            }
+
+            nav a {
+                padding: 8px 14px;
+            }
+
+            main {
+                padding: 24px 0 36px;
+                gap: 28px;
+            }
+
+            .about-card,
+            .card {
+                padding: 14px 16px;
+            }
+        }
+
         footer {
             width: 100%;
             background: var(--mantle);
